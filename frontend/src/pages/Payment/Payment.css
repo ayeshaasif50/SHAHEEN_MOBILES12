@@ -1,0 +1,312 @@
+/* ========================
+   PAYMENT PAGE
+   ======================== */
+.payment-page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ========================
+   LEFT
+   ======================== */
+.payment-left {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 50px 50px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-back-btn {
+  background: none;
+  border: none;
+  color: #aaaaaa;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: 36px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.payment-back-btn:hover { color: #ffffff; }
+
+.payment-brand { margin-bottom: 30px; }
+
+.payment-brand-name {
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: 0.5px;
+}
+
+.payment-label {
+  font-size: 14px;
+  color: #aaaaaa;
+  margin: 0 0 8px;
+}
+
+.payment-amount {
+  font-size: 38px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 32px;
+}
+
+/* Items */
+.payment-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid #333333;
+  margin-bottom: 24px;
+  flex: 1;
+}
+
+.payment-item-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-bottom: 1px solid #333333;
+  gap: 20px;
+}
+
+.payment-item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px;
+}
+
+.payment-item-qty {
+  font-size: 12px;
+  color: #888888;
+  margin: 0;
+}
+
+.payment-item-price {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+}
+
+.discount-row .payment-item-name,
+.discount-row .payment-item-price {
+  color: #4caf50;
+}
+
+.payment-secure {
+  font-size: 12px;
+  color: #666666;
+  margin: 0;
+}
+
+/* ========================
+   RIGHT
+   ======================== */
+.payment-right {
+  background: #ffffff;
+  padding: 50px 50px 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pay-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 18px;
+}
+
+/* METHOD BUTTONS */
+.pay-methods {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.pay-method-btn {
+  border: 1.5px solid #e0e0e0;
+  background: #f8f8f8;
+  color: #333;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pay-method-btn.active {
+  background: #1a1a1a;
+  color: #fff;
+  border-color: #1a1a1a;
+}
+
+/* ========================
+   FORM
+   ======================== */
+.pay-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  flex: 1;
+}
+
+.pay-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.pay-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #555555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.pay-field input,
+.pay-select {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  color: #1a1a1a;
+  outline: none;
+  background: #ffffff;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.pay-field input:focus,
+.pay-select:focus {
+  border-color: #1a1a1a;
+}
+
+.pay-field input::placeholder { color: #bbbbbb; }
+
+/* Card number */
+.card-number-wrap {
+  position: relative;
+}
+
+.card-number-wrap input {
+  padding-right: 90px;
+}
+
+.card-icons {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 6px;
+}
+
+.card-icon {
+  font-size: 9px;
+  font-weight: 800;
+  padding: 3px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.card-icon.visa { background: #1a1f71; color: #ffffff; }
+.card-icon.mc   { background: #eb001b; color: #ffffff; }
+
+/* Expiry + CVC */
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.cvc-wrap { position: relative; }
+
+/* Select */
+.pay-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23555' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* COD */
+.cod-box {
+  background: #f7f7f7;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  padding: 16px;
+}
+.cod-box h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  color: #222;
+}
+.cod-box p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+/* Pay Button */
+.pay-btn {
+  padding: 15px;
+  background: #1a1a1a;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: "Segoe UI", sans-serif;
+  transition: all 0.25s;
+  margin-top: 4px;
+  letter-spacing: 0.3px;
+}
+
+.pay-btn:hover:not(:disabled) {
+  background: #333232;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(26,26,26,0.3);
+}
+
+.pay-btn:disabled {
+  background: #888888;
+  cursor: not-allowed;
+}
+
+.pay-secure-note {
+  font-size: 12px;
+  color: #aaaaaa;
+  text-align: center;
+  margin: 14px 0 0;
+}
+
+/* ========================
+   TABLET
+   ======================== */
+@media (max-width: 900px) {
+  .payment-page { grid-template-columns: 1fr; }
+  .payment-left  { padding: 36px 28px; }
+  .payment-right { padding: 36px 28px; }
+  .payment-amount { font-size: 30px; }
+}
+
+@media (max-width: 480px) {
+  .payment-left, .payment-right { padding: 28px 16px; }
+  .card-row { grid-template-columns: 1fr; }
+}

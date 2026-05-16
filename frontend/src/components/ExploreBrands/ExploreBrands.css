@@ -1,0 +1,256 @@
+/* ===== SECTION ===== */
+.explore-brands {
+  padding: 50px 80px 30px;
+  background-color: #ffffff;
+}
+
+/* ===== HEADER ===== */
+.explore-header {
+  margin-bottom: 36px;
+  text-align: center;        /* ✅ Header center */
+}
+
+.explore-title {
+  font-size: 28px;
+  font-weight: 800;
+  color: #1a1a1a;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0 0 10px 0;
+}
+
+.explore-desc {
+  font-size: 14px;
+  color: #666666;
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.7;
+  max-width: 580px;
+  margin: 0 auto;            /* ✅ Desc center */
+}
+
+/* ===== BRANDS LIST ===== */
+.brands-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;  /* ✅ Equal space distribute */
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* ===== BRAND ITEM ===== */
+.brand-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.brand-item:hover {
+  transform: translateY(-4px);
+}
+
+/* ===== BRAND CIRCLE ===== */
+.brand-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid #e5e7eb;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brand-circle img {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
+
+/* Active / selected brand */
+.brand-item.active .brand-circle {
+  border-color: #333232;
+  box-shadow: 0 0 0 4px rgba(51, 50, 50, 0.15);
+}
+
+.brand-item.active .brand-name {
+  color: #333232;
+  font-weight: 700;
+}
+
+/* Hover circle */
+.brand-item:hover .brand-circle {
+  border-color: #333232;
+  box-shadow: 0 4px 16px rgba(51, 50, 50, 0.15);
+}
+
+/* ===== BRAND NAME ===== */
+.brand-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #444444;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  transition: color 0.2s ease;
+}
+
+/* ===== BRAND DESCRIPTION BOX ===== */
+.brand-description {
+  margin-top: 32px;
+  background-color: #f8f8f8;
+  border-left: 4px solid #333232;
+  border-radius: 12px;
+  padding: 24px 30px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.brand-desc-inner {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.brand-desc-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.brand-desc-text h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1a1a1a;
+  font-family: "Segoe UI", sans-serif;
+  margin: 0 0 8px 0;
+}
+
+.brand-desc-text p {
+  font-size: 14px;
+  color: #555555;
+  font-family: "Segoe UI", sans-serif;
+  line-height: 1.7;
+  margin: 0 0 16px 0;
+}
+
+/* Shop Button */
+.brand-shop-btn {
+  padding: 10px 26px;
+  background-color: #333232;
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Segoe UI", sans-serif;
+  transition: all 0.25s ease;
+  letter-spacing: 0.5px;
+}
+
+.brand-shop-btn:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(51, 50, 50, 0.3);
+}
+
+/* ===== DIVIDER ===== */
+.explore-divider {
+  height: 1px;
+  background-color: #e5e7eb;
+  margin-top: 40px;
+}
+
+/* ===== TABLET - 1024px ===== */
+@media (max-width: 1024px) {
+  .explore-brands {
+    padding: 40px 40px 30px;
+  }
+
+  .brand-circle {
+    width: 88px;
+    height: 88px;
+  }
+
+  .brands-list {
+    gap: 20px;
+    justify-content: space-evenly;  /* ✅ */
+  }
+}
+
+/* ===== MOBILE - 768px ===== */
+@media (max-width: 768px) {
+  .explore-brands {
+    padding: 36px 20px 24px;
+  }
+
+  .explore-title {
+    font-size: 22px;
+  }
+
+  .explore-desc {
+    font-size: 13px;
+  }
+
+  .brands-list {
+    gap: 16px;
+    justify-content: space-evenly;   /* ✅ */
+  }
+
+  .brand-circle {
+    width: 76px;
+    height: 76px;
+  }
+
+  .brand-name {
+    font-size: 12px;
+  }
+
+  .brand-desc-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .brand-desc-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .brand-description {
+    padding: 20px;
+  }
+}
+
+/* ===== SMALL MOBILE - 480px ===== */
+@media (max-width: 480px) {
+  .explore-brands {
+    padding: 28px 16px 20px;
+  }
+
+  .brands-list {
+    gap: 14px;
+    justify-content: space-evenly;   /* ✅ */
+  }
+
+  .brand-circle {
+    width: 68px;
+    height: 68px;
+  }
+
+  .brand-name {
+    font-size: 11px;
+  }
+
+  .explore-title {
+    font-size: 20px;
+  }
+}

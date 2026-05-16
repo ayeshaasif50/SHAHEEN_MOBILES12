@@ -1,0 +1,279 @@
+/* ========================
+   FOOTER
+   ======================== */
+.footer {
+  background-color: #1a1a1a;
+  color: #cccccc;
+  padding: 60px 60px 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ========================
+   TOP SECTION
+   ======================== */
+.footer-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 40px;
+}
+
+/* ========================
+   COLUMNS
+   ======================== */
+.footer-col {
+  flex: 1;
+  min-width: 160px;
+}
+
+.footer-brand-col {
+  flex: 1.6;
+  min-width: 220px;
+}
+
+.footer-visit-col {
+  flex: 1.8;
+  min-width: 220px;
+}
+
+/* ========================
+   LOGO
+   ======================== */
+.footer-logo {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.footer-brand-desc {
+  font-size: 13px;
+  color: #aaaaaa;
+  line-height: 1.7;
+  margin: 0 0 20px 0;
+  max-width: 240px;
+}
+
+/* ========================
+   SOCIAL ICONS ✅ FIXED
+   ======================== */
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  overflow: hidden;
+  /* ✅ Transparent background — icon apni color mein dikhega */
+  background-color: transparent;
+  border: 1px solid #3a3a3a;
+  padding: 6px;
+  box-sizing: border-box;
+  transition: all 0.25s ease;
+}
+
+/* ✅ NO filter — original colored icons dikhenge */
+.social-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  /* ❌ filter: brightness(0) invert(1);  — REMOVED */
+}
+
+.social-link:hover {
+  border-color: #666666;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 14px rgba(255, 255, 255, 0.10);
+  background-color: #2e2e2e;
+}
+
+/* ========================
+   COLUMN TITLE
+   ======================== */
+.footer-col-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 18px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #2e2e2e;
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* ========================
+   LINKS
+   ======================== */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links li a {
+  font-size: 13px;
+  color: #aaaaaa;
+  text-decoration: none;
+  font-family: "Segoe UI", sans-serif;
+  transition: color 0.2s ease, padding-left 0.2s ease;
+  display: inline-block;
+}
+
+.footer-links li a:hover {
+  color: #ffffff;
+  padding-left: 4px;
+}
+
+/* ========================
+   ADDRESS & CONTACT
+   ======================== */
+.footer-address {
+  font-size: 13px;
+  color: #aaaaaa;
+  line-height: 1.8;
+  margin: 0 0 14px 0;
+}
+
+.footer-contact-info {
+  margin-bottom: 14px;
+}
+
+.footer-contact-info p {
+  font-size: 13px;
+  color: #aaaaaa;
+  margin: 0 0 6px 0;
+  line-height: 1.6;
+}
+
+.footer-contact-info a {
+  color: #aaaaaa;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-contact-info a:hover {
+  color: #ffffff;
+}
+
+.footer-hours p {
+  font-size: 12px;
+  color: #888888;
+  margin: 0 0 4px 0;
+  line-height: 1.6;
+}
+
+.footer-hours strong {
+  color: #aaaaaa;
+}
+
+/* ========================
+   DIVIDER
+   ======================== */
+.footer-divider {
+  height: 1px;
+  background-color: #2e2e2e;
+  margin: 0 -60px;
+}
+
+/* ========================
+   BOTTOM
+   ======================== */
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.footer-bottom p {
+  font-size: 12px;
+  color: #555555;
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.footer-bottom span {
+  color: #aaaaaa;
+  font-weight: 600;
+}
+
+.footer-bottom-right {
+  font-size: 12px;
+  color: #555555;
+}
+
+/* ========================
+   TABLET 1024px
+   ======================== */
+@media (max-width: 1024px) {
+  .footer { padding: 50px 40px 0; }
+  .footer-divider { margin: 0 -40px; }
+  .footer-top { gap: 28px; }
+}
+
+/* ========================
+   TABLET 768px
+   ======================== */
+@media (max-width: 768px) {
+  .footer { padding: 40px 24px 0; }
+  .footer-divider { margin: 0 -24px; }
+  .footer-top { gap: 28px; }
+
+  .footer-col {
+    min-width: 140px;
+    flex: 1 1 40%;
+  }
+  .footer-brand-col {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
+  .footer-brand-desc { max-width: 100%; }
+  .footer-visit-col {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 4px;
+  }
+}
+
+/* ========================
+   MOBILE 480px
+   ======================== */
+@media (max-width: 480px) {
+  .footer { padding: 32px 16px 0; }
+  .footer-divider { margin: 0 -16px; }
+  .footer-col { flex: 1 1 100%; }
+  .footer-col-title {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+  .footer-links li a { font-size: 12px; }
+  .footer-logo { width: 120px; }
+  .social-link {
+    width: 36px;
+    height: 36px;
+    padding: 5px;
+  }
+}

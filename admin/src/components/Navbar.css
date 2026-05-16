@@ -1,0 +1,86 @@
+.navbar {
+  height: 70px;
+  background: #1f2a28;            /* dark grey-green */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  border-bottom: 1px solid #2f3b38;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Brand */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-logo img {
+  height: 42px;
+  object-fit: contain;
+}
+
+/* Text now light because dark bg */
+.brand-text h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+}
+
+.brand-text span {
+  font-size: 11px;
+  color: #cbd5d1;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Right */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Live badge adjusted for dark bg */
+.live-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #243532;
+  color: #34d399;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #2f4f46;
+}
+
+.live-dot {
+  width: 7px;
+  height: 7px;
+  background: #10b981;
+  border-radius: 50%;
+  animation: blink 1.4s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .4; }
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  background: #111827;
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+}

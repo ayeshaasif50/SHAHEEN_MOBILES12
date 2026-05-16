@@ -1,0 +1,174 @@
+/* ===========================
+   LIST PRODUCTS CSS - FINAL
+   =========================== */
+
+.list-products {
+  padding: 32px;
+  background: #f8f9fb;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.page-header {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-header h2 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.page-header p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* TABLE WRAPPER */
+.products-table-wrap {
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid #e4e6eb;
+  overflow: hidden;
+}
+
+.products-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.products-table th {
+  padding: 14px;
+  background: #f4f6f8;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #555;
+}
+
+.products-table td {
+  padding: 14px;
+  color: #444;
+  vertical-align: middle; /* ✅ center content vertically */
+}
+
+.products-table tbody tr:hover {
+  background: #f9fafb;
+}
+
+/* IMAGE */
+.product-thumb {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+}
+
+/* TEXT */
+.product-name {
+  font-weight: 600;
+}
+
+.price {
+  font-weight: bold;
+}
+
+/* STOCK BADGES */
+.stock-badge {
+  display: inline-block;   /* ✅ ensures proper spacing */
+  min-width: 50px;         /* consistent width */
+  text-align: center;      /* center text */
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.in-stock {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.out-stock {
+  background: #fdecea;
+  color: #c62828;
+}
+
+/* GENERIC BADGES */
+.badge-tag {
+  background: #2f2f2f;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+}
+
+/* ACTION CELL FIX (SPACING) */
+.actions-cell {
+  display: flex;
+  gap: 10px; /* ✅ spacing between buttons */
+}
+
+/* BUTTONS */
+.edit-btn,
+.delete-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* spacing between icon and text */
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid #3a3a3a;
+  background: #2f2f2f;
+  color: #fff;
+  transition: 0.2s;
+}
+
+.delete-btn {
+  background: #3a3a3a;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  background: #444;
+  transform: scale(1.05);
+}
+
+/* ICONS */
+.btn-icon {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: brightness(0) invert(1); /* ✅ makes icon white */
+}
+
+/* NO DATA / LOADING STATES */
+.no-data {
+  text-align: center;
+  padding: 50px;
+  color: #999;
+}
+
+.loading {
+  text-align: center;
+  padding: 70px;
+  color: #999;
+}
+
+/* RESPONSIVE TABLE */
+@media (max-width: 768px) {
+  .products-table th,
+  .products-table td {
+    padding: 10px 8px;
+    font-size: 12px;
+  }
+
+  .action-btn {
+    padding: 5px 8px;
+    font-size: 12px;
+  }
+}
