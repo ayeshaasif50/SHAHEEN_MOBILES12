@@ -12,7 +12,7 @@ import {
   addAddress,
   updateAddress,
   deleteAddress,
-} from "../controllers/addressController.js";
+} from "../controllers/addresscontroller.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
