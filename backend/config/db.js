@@ -2,15 +2,15 @@ import mongoose from "mongoose";
 
 const connectDB = async () => {
   try {
-    console.log("⏳ MongoDB se connect ho raha hai...");
+    console.log(" MongoDB IS CONNECTING...");
     const conn = await mongoose.connect(process.env.MONGO_URI, {
       serverSelectionTimeoutMS: 30000,
       socketTimeoutMS: 30000,
     });
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    console.log(` MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`❌ MongoDB Error: ${error.message}`);
-    console.log("⏳ 10 seconds baad retry karega...");
+    console.log("RETRY IN 10 SECONDS...");
     setTimeout(connectDB, 10000); // ← crash nahi hoga!
   }
 };

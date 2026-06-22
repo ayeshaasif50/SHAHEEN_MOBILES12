@@ -2,82 +2,88 @@
 import React, { useState } from "react";
 import { IMG_BASE } from "../../utils/api";
 
-export default function ReviewCard({ review, onWriteReview }) {
-  const [showFullText, setShowFullText] = useState(false);
+const IMG_BASE_URL = IMG_BASE || "http://localhost:5000";
 
-  const truncateText = (text, limit = 100) => {
-    if (!text) return "";
-    return text.length > limit ? text.substring(0, limit) + "..." : text;
-  };
+const makeUrl = (p) => {
+  if (!p || typeof p !== "string") return "/placeholder.png";
+  if (p.startsWith("http://") || p.startsWith("https://")) return p;
+  return `${IMG_BASE_URL}${p.startsWith("/") ? p : `/${p}`}`;
+};
 
-  const makeUrl = (path) => {
-    if (!path) return "/placeholder.png";
-    if (typeof path !== "string") return "/placeholder.png";
-    if (path.startsWith("http://") || path.startsWith("https://")) return path;
-    if (path.startsWith(IMG_BASE)) return path;
-    const p = path.startsWith("/") ? path : `/${path}`;
-    return `${IMG_BASE}${p}`;
-  };
+export default function ReviewCard({ review, onWriteReview, onDelete }) {
+  const [expanded, setExpanded] = useState(false);
 
-  // support both shapes: review.product may be string or object
   const productName =
     typeof review.product === "string"
       ? review.product
-      : review.product?.name || review.product?.title || "";
+      : review.product?.name || review.product?.title || "Product";
 
   const productImages =
-    (review.product && review.product.images && review.product.images.length)
+    review.product?.images?.length
       ? review.product.images
-      : (review.images || []);
+      : review.images || [];
 
-  const reviewText = review.text || review.comment || "";
+  const reviewText = review.comment || review.text || "";
+  const truncated  = reviewText.length > 140 && !expanded ? `${reviewText.slice(0, 140)}…` : reviewText;
+
+  const stars = review.rating || review.rate || 0;
 
   return (
     <div className="review-card review-elevated">
+      {/* Product image */}
       <div className="review-left">
-        <div className="review-thumb">
-          <img
-            src={makeUrl(productImages?.[0])}
-            alt={productName || "Product image"}
-            onError={(e) => { e.target.onerror = null; e.target.src = "/placeholder.png"; }}
-          />
-        </div>
+        <img
+          src={makeUrl(productImages[0])}
+          alt={productName}
+          className="review-thumb-img"
+          onError={(e) => { e.target.src = "/placeholder.png"; }}
+        />
       </div>
 
+      {/* Body */}
       <div className="review-body">
         <h4 className="product-title">{productName}</h4>
         <p className="purchase-date">
-          Purchased on {review.date || new Date(review.createdAt || review.created_at || Date.now()).toLocaleDateString()}
+          Reviewed on {new Date(review.createdAt || review.created_at || Date.now()).toLocaleDateString()}
         </p>
 
-        <div className="rating">
+        <div className="stars-row">
           {Array.from({ length: 5 }).map((_, i) => (
-            <span key={i} className={i < (review.rating || review.rate || 0) ? "star filled" : "star"}>
-              ★
-            </span>
+            <span key={i} className={i < stars ? "star filled" : "star"}>★</span>
           ))}
         </div>
 
-        <p className="review-text">{truncateText(reviewText, showFullText ? 1000 : 100)}</p>
-
-        {productImages && productImages.length > 0 && (
-          <div className="review-images">
-            {productImages.slice(0, 2).map((src, idx) => (
-              <img
-                key={idx}
-                src={makeUrl(src)}
-                alt={`${productName || "product"}-${idx}`}
-                onError={(e) => { e.target.onerror = null; e.target.src = "/placeholder.png"; }}
-              />
-            ))}
-          </div>
+        {reviewText && (
+          <p className="review-text">
+            {truncated}
+            {reviewText.length > 140 && (
+              <button
+                className="read-more-btn"
+                onClick={() => setExpanded((s) => !s)}
+              >
+                {expanded ? " Show less" : " Read more"}
+              </button>
+            )}
+          </p>
         )}
       </div>
 
+      {/* Actions */}
       <div className="review-actions">
-        <button className="btn btn-primary" onClick={() => onWriteReview(review)}>
-          Edit Review
+        <button
+          className="btn btn-primary"
+          onClick={() => onWriteReview && onWriteReview(review)}
+        >
+          Edit
         </button>
+        {typeof onDelete === "function" && (
+          <button
+            className="btn btn-danger"
+            onClick={() => onDelete(review)}
+          >
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );

@@ -26,11 +26,11 @@ const colorSchema = new mongoose.Schema({
 
 const productSchema = new mongoose.Schema(
   {
-    name:     { type: String,  required: [true, "Product naam zaroori hai"], trim: true },
+    name:     { type: String,  required: [true, "Product name is required"], trim: true },
     brand:    { type: String,  required: true },
     series:   { type: String,  default: "" },
     category: { type: String,  default: "Mobiles" },
-    price:    { type: Number,  required: [true, "Price zaroori hai"], min: 0 },
+    price:    { type: Number,  required: [true, "Price is required"], min: 0 },
     oldPrice: { type: Number,  default: null },
 
     // ── Specs ─────────────────────────────────

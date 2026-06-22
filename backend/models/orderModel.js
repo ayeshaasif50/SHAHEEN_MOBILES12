@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const orderItemSchema = new mongoose.Schema({
-  name:    { type: String,  required: true }, // ✅ product name saved
+  name:    { type: String,  required: true },
   qty:     { type: Number,  required: true },
   image:   { type: String,  default: "" },
   price:   { type: Number,  required: true },
@@ -16,7 +16,6 @@ const orderSchema = new mongoose.Schema(
   {
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
 
-    // ✅ store name/email for display
     customerName:  { type: String, default: "" },
     customerEmail: { type: String, default: "" },
 
@@ -55,6 +54,17 @@ const orderSchema = new mongoose.Schema(
     paidAt:      { type: Date },
     isDelivered: { type: Boolean, default: false },
     deliveredAt: { type: Date },
+
+    cancelledAt: { type: Date },
+    cancelReason: { type: String, default: "" },
+    cancelledBy: {
+      type: String,
+      enum: ["user", "admin", ""],
+      default: "",
+    },
+
+    // Prevents double-awarding loyalty points if status flips back and forth
+    pointsAwarded: { type: Boolean, default: false },
   },
   { timestamps: true }
 );

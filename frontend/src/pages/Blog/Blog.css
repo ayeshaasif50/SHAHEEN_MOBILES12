@@ -36,7 +36,7 @@
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   font-family: 'Syne', system-ui, sans-serif;
-  background-color: var(--cream);
+  background-color: var(--white);
   color: var(--ink);
   min-height: 100vh;
   overflow-x: hidden;

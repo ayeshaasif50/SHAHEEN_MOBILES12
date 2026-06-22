@@ -1,6 +1,6 @@
 .navbar {
   height: 70px;
-  background: #1f2a28;            /* dark grey-green */
+  background: #1f2a28;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,7 +11,6 @@
   z-index: 999;
 }
 
-/* Brand */
 .navbar-brand {
   display: flex;
   align-items: center;
@@ -23,7 +22,6 @@
   object-fit: contain;
 }
 
-/* Text now light because dark bg */
 .brand-text h1 {
   font-size: 18px;
   font-weight: 700;
@@ -38,14 +36,12 @@
   text-transform: uppercase;
 }
 
-/* Right */
 .navbar-right {
   display: flex;
   align-items: center;
   gap: 16px;
 }
 
-/* Live badge adjusted for dark bg */
 .live-badge {
   display: flex;
   align-items: center;
@@ -83,4 +79,64 @@
   justify-content: center;
   font-weight: 700;
   cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ========== RESPONSIVE ========== */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .brand-text span {
+    display: none;
+  }
+
+  .live-badge {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Mobile large */
+@media (max-width: 640px) {
+  .navbar {
+    padding: 0 14px;
+    height: 60px;
+  }
+
+  .brand-logo img {
+    height: 34px;
+  }
+
+  .brand-text h1 {
+    font-size: 15px;
+  }
+
+  .live-badge {
+    display: none;
+  }
+
+  .navbar-right {
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 13px;
+  }
+}
+
+/* Mobile small */
+@media (max-width: 380px) {
+  .navbar {
+    padding: 0 10px;
+  }
+
+  .brand-text h1 {
+    font-size: 14px;
+  }
 }

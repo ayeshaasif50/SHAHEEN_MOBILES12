@@ -1,6 +1,7 @@
 // backend/controllers/productController.js
 import Product from "../models/productModel.js";
 import Review from "../models/reviewModel.js";
+import User from "../models/userModel.js";
 
 export const getProducts = async (req, res) => {
   try {
@@ -56,7 +57,7 @@ export const getProduct = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product)
-      return res.status(404).json({ success: false, message: "Product nahi mila" });
+      return res.status(404).json({ success: false, message: "PRODUCT NOT FOUND" });
     res.json({ success: true, product });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
@@ -78,7 +79,7 @@ export const updateProduct = async (req, res) => {
       req.params.id, req.body, { new: true, runValidators: true }
     );
     if (!product)
-      return res.status(404).json({ success: false, message: "Product nahi mila" });
+      return res.status(404).json({ success: false, message: "PRODUCT NOT FOUND" });
     res.json({ success: true, product });
   } catch (error) {
     res.status(400).json({ success: false, message: error.message });
@@ -89,8 +90,8 @@ export const deleteProduct = async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
     if (!product)
-      return res.status(404).json({ success: false, message: "Product nahi mila" });
-    res.json({ success: true, message: "Product delete ho gaya" });
+      return res.status(404).json({ success: false, message: "PRODUCT NOT FOUND" });
+    res.json({ success: true, message: "PRODUCT DELETED" });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
@@ -107,7 +108,7 @@ export const addReview = async (req, res) => {
 
     const product = await Product.findById(req.params.id);
     if (!product)
-      return res.status(404).json({ success: false, message: "Product nahi mila" });
+      return res.status(404).json({ success: false, message: "PRODUCT NOT FOUND" });
 
     // create embedded review
     const reviewForProduct = { name, rating: Number(rating), comment };
@@ -136,6 +137,12 @@ export const addReview = async (req, res) => {
       // update embedded with productReviewId
       createdEmbedded.productReviewId = reviewDoc._id;
       await product.save();
+
+      // Award 5 loyalty points for writing a review
+      if (req.user) {
+        try { await User.findByIdAndUpdate(req.user._id, { $inc: { points: 5 } }); }
+        catch (errPts) { console.warn("Warning: unable to award review points:", errPts); }
+      }
 
       return res.status(201).json({ success: true, review: reviewDoc, product });
     } catch (errCreate) {

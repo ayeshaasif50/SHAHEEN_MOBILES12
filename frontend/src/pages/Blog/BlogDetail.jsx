@@ -11,7 +11,6 @@ import {
   CheckCircle2,
   XCircle,
   MessageCircle,
-  Tag,
   Share2,
 } from 'lucide-react';
 
@@ -33,11 +32,12 @@ const renderStars = (rating) =>
 const CategoryBadge = ({ category }) => {
   const iconMap = {
     'Mobile Reviews': '📱',
-    'Buying Guide':   '🧭',
-    'Tech News':      '⚡',
-    'Tips & Tricks':  '💡',
-    'Comparison':     '⚖️',
+    'Buying Guide': '🧭',
+    'Tech News': '⚡',
+    'Tips & Tricks': '💡',
+    Comparison: '⚖️',
   };
+
   return (
     <span className="bd-cat-badge">
       <span>{iconMap[category] || '◈'}</span>
@@ -56,8 +56,8 @@ const BlogDetail = () => {
     return (
       <div className="bd-not-found">
         <span className="bd-404">404</span>
-        <h2>Article not found</h2>
-        <p>This article doesn't exist or may have been moved.</p>
+        <h2>Article Not Found</h2>
+        <p>This article does not exist or may have been moved.</p>
         <button className="bd-back-btn" onClick={() => navigate('/blog')}>
           <ArrowLeft size={16} /> Back to Blog
         </button>
@@ -77,17 +77,20 @@ const BlogDetail = () => {
   const handleShare = (platform) => {
     const url = encodeURIComponent(window.location.href);
     const text = encodeURIComponent(post.title);
+
     const links = {
-      facebook:  `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-      twitter:   `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
-      whatsapp:  `https://wa.me/?text=${text}%20${url}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
+      twitter: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
+      whatsapp: `https://wa.me/?text=${text}%20${url}`,
     };
-    if (links[platform]) window.open(links[platform], '_blank', 'noopener,noreferrer');
+
+    if (links[platform]) {
+      window.open(links[platform], '_blank', 'noopener,noreferrer');
+    }
   };
 
   return (
     <div className="bd-page">
-
       {/* ── HERO ── */}
       <header className="bd-hero">
         <div className="bd-hero-bg">
@@ -106,11 +109,17 @@ const BlogDetail = () => {
           <h1>{post.title}</h1>
 
           <div className="bd-meta-strip">
-            <span><UserRound size={13} /> {post.author}</span>
+            <span>
+              <UserRound size={13} /> {post.author}
+            </span>
             <span className="meta-sep">·</span>
-            <span><CalendarDays size={13} /> {post.date}</span>
+            <span>
+              <CalendarDays size={13} /> {post.date}
+            </span>
             <span className="meta-sep">·</span>
-            <span><Clock3 size={13} /> {post.readTime} read</span>
+            <span>
+              <Clock3 size={13} /> {post.readTime} read
+            </span>
             {post.rating && (
               <>
                 <span className="meta-sep">·</span>
@@ -124,7 +133,6 @@ const BlogDetail = () => {
       {/* ── BODY ── */}
       <div className="bd-container">
         <div className="bd-layout">
-
           {/* LEFT — SIDEBAR */}
           <aside className="bd-sidebar">
             {/* Author */}
@@ -136,12 +144,16 @@ const BlogDetail = () => {
                   <span className="bd-author-role">Editorial Team</span>
                 </div>
               </div>
-              <p className="bd-author-bio">Pakistan's trusted mobile store — honest reviews &amp; latest updates since 2010.</p>
+              <p className="bd-author-bio">
+                Pakistan&apos;s trusted mobile store — honest reviews and latest updates since 2010.
+              </p>
             </div>
 
             {/* Article Info */}
             <div className="bd-sb-card">
-              <h4 className="bd-sb-title"><ClipboardList size={14} /> Article Info</h4>
+              <h4 className="bd-sb-title">
+                <ClipboardList size={14} /> Article Info
+              </h4>
               <dl className="bd-info-list">
                 <div className="bd-info-row">
                   <dt>Category</dt>
@@ -167,13 +179,18 @@ const BlogDetail = () => {
             {/* Related */}
             {related.length > 0 && (
               <div className="bd-sb-card">
-                <h4 className="bd-sb-title"><BookOpenText size={14} /> Related Articles</h4>
+                <h4 className="bd-sb-title">
+                  <BookOpenText size={14} /> Related Articles
+                </h4>
                 <div className="bd-related">
                   {related.map((rp) => (
                     <button
                       key={rp.id}
                       className="bd-related-item"
-                      onClick={() => { navigate(`/blog/${rp.id}`); window.scrollTo(0, 0); }}
+                      onClick={() => {
+                        navigate(`/blog/${rp.id}`);
+                        window.scrollTo(0, 0);
+                      }}
                     >
                       <div className="bd-related-thumb">
                         <img src={rp.image} alt={rp.title} />
@@ -193,7 +210,7 @@ const BlogDetail = () => {
             <div className="bd-sb-card bd-shop-card">
               <ShoppingBag size={22} />
               <h4>Shop Latest Phones</h4>
-              <p>Browse the latest smartphones available in Pakistan now.</p>
+              <p>Browse the latest smartphones available in Pakistan right now.</p>
               <button className="bd-shop-btn" onClick={() => navigate('/shop')}>
                 Visit Shop →
               </button>
@@ -234,7 +251,11 @@ const BlogDetail = () => {
                   );
                 }
 
-                return <p key={i} className="bd-para">{para}</p>;
+                return (
+                  <p key={i} className="bd-para">
+                    {para}
+                  </p>
+                );
               })}
             </div>
 
@@ -245,17 +266,26 @@ const BlogDetail = () => {
                 <div className="bd-pros-cons">
                   {post.pros && (
                     <div className="bd-pros">
-                      <h4><CheckCircle2 size={15} /> Pros</h4>
+                      <h4>
+                        <CheckCircle2 size={15} /> Pros
+                      </h4>
                       <ul>
-                        {post.pros.map((item, i) => <li key={i}>{item}</li>)}
+                        {post.pros.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
                       </ul>
                     </div>
                   )}
+
                   {post.cons && (
                     <div className="bd-cons">
-                      <h4><XCircle size={15} /> Cons</h4>
+                      <h4>
+                        <XCircle size={15} /> Cons
+                      </h4>
                       <ul>
-                        {post.cons.map((item, i) => <li key={i}>{item}</li>)}
+                        {post.cons.map((item, i) => (
+                          <li key={i}>{item}</li>
+                        ))}
                       </ul>
                     </div>
                   )}
@@ -281,13 +311,25 @@ const BlogDetail = () => {
             <div className="bd-share-section">
               <span>Share this article</span>
               <div className="bd-share-btns">
-                <button className="bd-share-btn" onClick={() => handleShare('facebook')} aria-label="Share on Facebook">
+                <button
+                  className="bd-share-btn"
+                  onClick={() => handleShare('facebook')}
+                  aria-label="Share on Facebook"
+                >
                   <Share2 size={13} /> Facebook
                 </button>
-                <button className="bd-share-btn" onClick={() => handleShare('twitter')} aria-label="Share on Twitter">
+                <button
+                  className="bd-share-btn"
+                  onClick={() => handleShare('twitter')}
+                  aria-label="Share on Twitter"
+                >
                   <Share2 size={13} /> Twitter
                 </button>
-                <button className="bd-share-btn wp" onClick={() => handleShare('whatsapp')} aria-label="Share on WhatsApp">
+                <button
+                  className="bd-share-btn wp"
+                  onClick={() => handleShare('whatsapp')}
+                  aria-label="Share on WhatsApp"
+                >
                   <MessageCircle size={13} /> WhatsApp
                 </button>
               </div>

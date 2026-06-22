@@ -45,6 +45,19 @@ export const updateReview = async (req, res) => {
     const reviewDoc = await Review.findById(reviewId);
     if (!reviewDoc) return res.status(404).json({ success: false, message: "Review not found" });
 
+    const isOwner =
+      reviewDoc.userId &&
+      reviewDoc.userId.toString() === req.user._id.toString();
+
+    const isAdmin = req.user.role === "admin";
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({
+        success: false,
+        message: "ONLY OWNER OR ADMIN CAN UPDATE REVIEW",
+      });
+    }
+
     if (typeof name !== "undefined") reviewDoc.name = name;
     if (typeof rating !== "undefined") reviewDoc.rating = Number(rating);
     if (typeof comment !== "undefined") reviewDoc.comment = comment;
@@ -71,6 +84,72 @@ export const updateReview = async (req, res) => {
     return res.json({ success: true, review: reviewDoc });
   } catch (err) {
     console.error("updateReview error:", err);
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+// ✅ DELETE /api/reviews/:id
+export const deleteReview = async (req, res) => {
+  try {
+    const reviewId = req.params.id;
+
+    const reviewDoc = await Review.findById(reviewId);
+    if (!reviewDoc) {
+      return res.status(404).json({
+        success: false,
+        message: "Review not found",
+      });
+    }
+
+    const isOwner =
+      reviewDoc.userId &&
+      reviewDoc.userId.toString() === req.user._id.toString();
+
+    const isAdmin = req.user.role === "admin";
+
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({
+        success: false,
+        message: "ONLY OWNER OR ADMIN CAN DELETE REVIEW",
+      });
+    }
+
+    if (reviewDoc.productReviewId) {
+      try {
+        const product = await Product.findById(reviewDoc.productId);
+
+        if (product) {
+          const sub = product.reviews.id(reviewDoc.productReviewId);
+
+          if (sub) {
+            sub.deleteOne();
+          }
+
+          if (product.reviews && product.reviews.length > 0) {
+            product.numReviews = product.reviews.length;
+            product.rating =
+              product.reviews.reduce((acc, item) => acc + item.rating, 0) /
+              product.reviews.length;
+          } else {
+            product.numReviews = 0;
+            product.rating = 0;
+          }
+
+          await product.save();
+        }
+      } catch (errSub) {
+        console.warn("Warning: unable to delete embedded product review:", errSub);
+      }
+    }
+
+    await reviewDoc.deleteOne();
+
+    res.json({
+      success: true,
+      message: "REVIEW DELETED",
+    });
+  } catch (err) {
+    console.error("deleteReview error:", err);
     res.status(500).json({ success: false, message: err.message });
   }
 };

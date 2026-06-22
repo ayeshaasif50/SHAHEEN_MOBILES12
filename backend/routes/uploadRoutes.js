@@ -1,13 +1,14 @@
 import express from "express";
-import { uploadImage }  from "../controllers/uploadController.js";
-import { protect }      from "../middleware/authMiddleware.js";
-import { adminOnly }    from "../middleware/adminMiddleware.js";
-import upload           from "../middleware/uploadMiddleware.js";
+import upload from "../middleware/uploadMiddleware.js";
+import { uploadProfileImage, uploadImage } from "../controllers/uploadController.js";
+import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Upload route
-// Field name 'image' must match frontend form
-router.post("/", protect, adminOnly, upload.single("image"), uploadImage);
+// Profile avatar – requires login so we know which user to update
+router.post("/avatar", protect, upload.single("avatar"), uploadProfileImage);
+
+// Generic product/other image upload (admin uses this)
+router.post("/", upload.single("image"), uploadImage);
 
 export default router;

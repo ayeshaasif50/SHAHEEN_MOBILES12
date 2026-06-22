@@ -1,17 +1,16 @@
-/* Sidebar matched to navbar color (flush & consistent) */
-
 :root {
-  /* If you want a single source of truth, set --navbar-bg here and use same in navbar CSS */
   --navbar-gradient: linear-gradient(180deg, #11171a 0%, #1b2326 100%);
 }
 
-/* Dark theme sidebar — now matches navbar exactly and sits flush */
+/* ================================
+   DESKTOP SIDEBAR
+   ================================ */
+
 .admin-sidebar {
   width: 250px;
-  /* sit flush with navbar (no top gap) */
   margin-top: 0;
-  height: calc(100vh - 70px); /* navbar height assumed 70px */
-  background: var(--navbar-gradient); /* same as navbar */
+  height: calc(100vh - 70px);
+  background: var(--navbar-gradient);
   border-right: 1px solid rgba(255,255,255,0.04);
   display: flex;
   flex-direction: column;
@@ -19,16 +18,15 @@
   padding: 18px 14px;
   box-sizing: border-box;
   color: #ffffff;
-  /* remove top-right curve so it aligns with navbar edge */
   border-top-right-radius: 0;
   border-bottom-right-radius: 14px;
   overflow: hidden;
   box-shadow: 0 12px 28px rgba(2,6,23,0.42);
   position: relative;
+  transition: width 0.22s ease, padding 0.22s ease;
 }
 
-/* Minor visual tweak: subtle inner highlight at top so sidebar and navbar blend nicely */
-.admin-sidebar::before{
+.admin-sidebar::before {
   content: "";
   position: absolute;
   top: 0;
@@ -39,7 +37,6 @@
   pointer-events: none;
 }
 
-/* SECTION LABEL */
 .menu-section-label {
   font-size: 11px;
   font-weight: 700;
@@ -47,9 +44,10 @@
   margin: 14px 10px 6px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
-/* MENU ITEMS */
 .menu-item {
   display: flex;
   align-items: center;
@@ -61,6 +59,8 @@
   font-weight: 500;
   background: transparent;
   transition: all 0.18s ease;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .menu-item:hover {
@@ -68,23 +68,22 @@
   color: #ffffff;
 }
 
-/* ACTIVE ITEM */
 .menu-item.active {
   background: rgba(255,255,255,0.06);
   color: #ffffff;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
 }
 
-/* ICON IMAGE */
 .menu-icon-img {
   width: 18px;
   height: 18px;
   object-fit: contain;
   filter: invert(1) sepia(1) saturate(0) brightness(3);
   opacity: 0.95;
+  flex-shrink: 0;
 }
 
-/* FOOTER */
+/* SIDEBAR FOOTER */
 .sidebar-footer {
   border-top: 1px solid rgba(255,255,255,0.03);
   padding-top: 12px;
@@ -97,9 +96,9 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  overflow: hidden;
 }
 
-/* avatar on dark bg */
 .footer-avatar {
   width: 36px;
   height: 36px;
@@ -110,22 +109,28 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
-/* footer text */
 .footer-text p {
   margin: 0;
   font-size: 13px;
   font-weight: 600;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .footer-text span {
   font-size: 11px;
   color: rgba(255,255,255,0.65);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
 }
 
-/* LOGOUT BUTTON */
 .logout-btn {
   width: 100%;
   display: flex;
@@ -139,6 +144,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.18s ease, transform 0.12s ease;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .logout-btn:hover {
@@ -152,19 +159,201 @@
   filter: invert(1) sepia(1) saturate(0) brightness(3);
 }
 
-/* RESPONSIVE: collapse behavior small screens */
-/* when collapsed keep curves smaller to match small width */
+/* ================================
+   MOBILE BOTTOM NAV — default hide
+   ================================ */
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* ================================
+   RESPONSIVE BREAKPOINTS
+   ================================ */
+
+/* Tablet — icon-only sidebar */
 @media (max-width: 900px) {
   .admin-sidebar {
     width: 72px;
     padding: 12px 8px;
-    margin-top: 0;
     height: calc(100vh - 70px);
-    border-top-right-radius: 10px;
+    border-top-right-radius: 0;
     border-bottom-right-radius: 10px;
   }
+
   .menu-section-label { display: none; }
+
+  .menu-item {
+    justify-content: center;
+    padding: 10px;
+  }
+
   .menu-item span { display: none; }
+
   .footer-text { display: none; }
-  .footer-avatar { width: 40px; height: 40px; }
+
+  .footer-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-info {
+    justify-content: center;
+  }
+
+  .logout-btn {
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .logout-btn span { display: none; }
+}
+
+/* Mobile — smaller sidebar */
+@media (max-width: 640px) {
+  .admin-sidebar {
+    width: 60px;
+    padding: 10px 6px;
+    height: calc(100vh - 60px);
+    border-bottom-right-radius: 8px;
+  }
+
+  .menu-item {
+    padding: 9px;
+  }
+
+  .menu-icon-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .footer-avatar {
+    width: 34px;
+    height: 34px;
+    font-size: 12px;
+  }
+}
+
+/* Small mobile — sidebar hide, bottom nav show */
+@media (max-width: 480px) {
+  .admin-sidebar {
+    display: none;
+  }
+
+  /* Main content ko bottom nav ki height se upar push karo */
+  .admin-main,
+  .main-content,
+  .page-content {
+    padding-bottom: 74px;
+  }
+
+  /* ---- BOTTOM NAV ---- */
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 64px;
+    background: #1f2a28;
+    border-top: 1px solid #2f3b38;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 6px;
+    /* iPhone notch / home bar ke liye */
+    padding-bottom: env(safe-area-inset-bottom);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+  }
+
+  .mob-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex: 1;
+    padding: 8px 6px;
+    border-radius: 10px;
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    transition: background 0.18s ease;
+  }
+
+  .mob-nav-item:hover {
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* Active state — NavLink se milta hai */
+  .mob-nav-item.active {
+    background: rgba(255,255,255,0.08);
+  }
+
+  .mob-nav-icon {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    filter: invert(1) sepia(1) saturate(0) brightness(3);
+    opacity: 0.5;
+    transition: opacity 0.18s;
+  }
+
+  .mob-nav-item.active .mob-nav-icon {
+    opacity: 1;
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(100deg) brightness(1.4);
+    /* green tint active icon pe */
+  }
+
+  .mob-nav-item span {
+    font-size: 9px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    transition: color 0.18s;
+  }
+
+  .mob-nav-item.active span {
+    color: #34d399;
+  }
+
+  /* Logout button styling — button tag hai, link nahi */
+  .mob-logout-btn {
+    color: rgba(255,255,255,0.4);
+  }
+
+  .mob-logout-btn:hover {
+    background: rgba(225,29,72,0.08);
+  }
+
+  .mob-logout-btn .mob-nav-icon {
+    filter: invert(1) sepia(1) saturate(0) brightness(3);
+    opacity: 0.5;
+  }
+
+  .mob-logout-btn:hover .mob-nav-icon {
+    opacity: 0.8;
+  }
+
+  .mob-logout-btn span {
+    color: rgba(255,100,100,0.7);
+  }
+}
+
+/* Very small screens */
+@media (max-width: 360px) {
+  .mobile-bottom-nav {
+    height: 60px;
+  }
+
+  .mob-nav-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .mob-nav-item span {
+    font-size: 8px;
+  }
 }

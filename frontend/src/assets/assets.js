@@ -24,13 +24,21 @@ import tiktok from "./icons/tiktok.png";
 
 // NEW icons you provided (exact filenames)
 import buy_icon from "./icons/icons8-buy-50.png";
-import number_7 from "./icons/number-7.png"; // number-7.png
-import marker_pen from "./icons/icons8-marker-pen-50.png"; // icons8-marker-pen-50.png
+import number_7 from "./icons/number-7.png";
+import marker_pen from "./icons/icons8-marker-pen-50.png";
 
 // Existing dropdown icons
 import order_icon from "./icons/icons8-order-50.png";
 import profile_icon from "./icons/profile.png";
 import logout_icon from "./icons/icons8-logout-50.png";
+
+
+// ✅ NEW IMAGES ADDED (your provided files)
+import huawei_rollable_phone from "./icons/huawei-rollable-phone-renders.jpg";
+import images_1 from "./icons/images (1).jpg";
+import images from "./icons/images.jpg";
+import smartphone_mockup from "./icons/realistic-3d-smartphone-with-neon-light-effect-isolated-transparent-background-vector-illustration-mobile-phone-mockup-with-blank-touchscreen-modern-communication-technology-smart-app_107791-21238.avif";
+
 
 export const assets = {
   cart_icon,
@@ -53,14 +61,22 @@ export const assets = {
   instagram,
   whatsapp,
   tiktok,
+
   // new icons
   buy_icon,
   number_7,
   marker_pen,
+
   // dropdown icons
   order_icon,
   profile_icon,
   logout_icon,
+
+  // ✅ new images added
+  huawei_rollable_phone,
+  images_1,
+  images,
+  smartphone_mockup,
 };
 
 export default assets;

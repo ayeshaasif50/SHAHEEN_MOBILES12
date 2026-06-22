@@ -139,20 +139,7 @@ const Navbar = ({ setShowLogin }) => {
                     <p className="drop-email">{user.email}</p>
                   </div>
                   <hr />
-                  <button
-                    className="drop-item"
-                    onClick={() => {
-                      navigate("/orders");
-                      setDropOpen(false);
-                    }}
-                  >
-                    <img
-                      src={assets.order_icon}
-                      alt="Orders"
-                      className="dropdown-icon"
-                    />{" "}
-                    My Orders
-                  </button>
+                  
                   <button
                     className="drop-item"
                     onClick={() => {
