@@ -1,28 +1,25 @@
 import multer from "multer";
-import path   from "path";
+import { CloudinaryStorage } from "multer-storage-cloudinary";
+import cloudinary from "../config/cloudinary.js";
 
-// Storage config
-const storage = multer.diskStorage({
-  destination(req, file, cb) {
-    cb(null, "uploads/"); // Ensure 'uploads' folder exists
-  },
-  filename(req, file, cb) {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, `${uniqueSuffix}-${file.originalname}`);
+// ✅ Cloudinary storage — images permanently save hoti hain
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "shaheen_mobiles",   // Cloudinary mein folder name
+    allowed_formats: ["jpg", "jpeg", "png", "webp"],
+    transformation: [{ width: 1200, quality: "auto", fetch_format: "auto" }],
   },
 });
 
 // File filter
 const fileFilter = (req, file, cb) => {
   const types = /jpeg|jpg|png|webp/;
-  const ext   = types.test(path.extname(file.originalname).toLowerCase());
   const mime  = types.test(file.mimetype);
-
-  if (ext && mime) cb(null, true);
+  if (mime) cb(null, true);
   else cb(new Error("Sirf images allowed hain (jpg, png, webp)"));
 };
 
-// Multer upload
 const upload = multer({
   storage,
   fileFilter,

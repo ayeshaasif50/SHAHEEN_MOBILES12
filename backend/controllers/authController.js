@@ -12,11 +12,12 @@ const generateToken = (id) =>
   });
 
 // ─── Send Cookie ──────────────────────────────
+// FIX: sameSite "none" + secure true = cross-origin cookies work (Vercel <-> Render)
 const sendTokenCookie = (res, token) => {
   res.cookie(COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    secure: true,        // ✅ FIXED: hamesha secure (HTTPS required for sameSite none)
+    sameSite: "none",    // ✅ FIXED: cross-origin cookies allow karta hai
     maxAge: COOKIE_MAX_AGE,
   });
 };
@@ -59,7 +60,7 @@ export const registerUser = async (req, res) => {
       name,
       email,
       phone,
-      password, // 🔥 handled by pre-save hook in model
+      password,
     });
 
     const token = generateToken(user._id);
@@ -215,7 +216,7 @@ export const updateProfile = async (req, res) => {
         });
       }
 
-      user.password = newPassword; // 🔥 pre-save hook will hash it
+      user.password = newPassword;
     }
 
     await user.save();
@@ -233,13 +234,12 @@ export const updateProfile = async (req, res) => {
 };
 
 
-
-//🔥 LOGOUT
+// 🔥 LOGOUT
 export const logoutUser = (req, res) => {
   res.clearCookie(COOKIE_NAME, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    secure: true,      // ✅ FIXED
+    sameSite: "none",  // ✅ FIXED
   });
 
   res.json({
