@@ -2,13 +2,20 @@ import { useNavigate } from 'react-router-dom';
 import './ProductCard.css';
 import { useCart } from '../../../context/CartContext';  // ← 3 dots! (../../.. )
 
+// ✅ FIX: localhost hardcode hataya — env variable se URL aata hai
+const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5000';
+
+const getImageUrl = (image) => {
+  if (!image) return '/placeholder.png';
+  if (image.startsWith('http')) return image; // ✅ Cloudinary URL directly use karo
+  return `${API_BASE}${image}`;               // local path ke liye backend URL
+};
+
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
 
-  const imageUrl = product.image
-    ? `http://localhost:5000${product.image}`
-    : '/placeholder.png';
+  const imageUrl = getImageUrl(product.image);
 
   return (
     <div

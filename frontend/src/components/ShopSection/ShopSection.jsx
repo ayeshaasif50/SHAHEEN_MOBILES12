@@ -4,12 +4,13 @@ import { useNavigate } from "react-router-dom";
 import API from "../../utils/api";
 import { useCart } from "../../context/CartContext";   // ← ADD
 
-const BASE_URL = "http://localhost:5000";
+// ✅ FIX: localhost hardcode hataya — env variable se URL aata hai
+const BASE_URL = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 
 const imgUrl = (path) => {
   if (!path) return "/placeholder.png";
-  if (path.startsWith("http")) return path;
-  return `${BASE_URL}${path}`;
+  if (path.startsWith("http")) return path; // ✅ Cloudinary URL directly use karo
+  return `${BASE_URL}${path}`;              // local path ke liye backend URL
 };
 
 const MIN_PRICE = 7000;
