@@ -142,12 +142,10 @@
   position: relative;
 }
 
-/* 🔥 FINAL PROFESSIONAL BUTTON */
 .user-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-
   background: transparent;
   border: none;
   padding: 4px;
@@ -159,28 +157,23 @@
   background: transparent;
 }
 
-/* 🔥 AVATAR ONLY (CIRCLE) */
 .user-avatar {
   width: 32px;
   height: 32px;
   background: #2d2d2d;
   color: white;
-
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-
   font-size: 14px;
   font-weight: 700;
 }
 
-/* ❌ REMOVE NAME FROM NAVBAR */
 .user-name {
   display: none;
 }
 
-/* 🔥 REMOVE ARROW */
 .drop-arrow {
   display: none;
 }
@@ -244,7 +237,6 @@
   font-family: "Segoe UI", sans-serif;
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
-
   background: transparent;
   border: none;
   outline: none;
@@ -331,10 +323,15 @@
   .navbar-logo { flex: 1; }
   .logo-img { height: 48px; }
   .navbar-right { flex: 1; justify-content: flex-end; gap: 12px; margin-right: 14px; }
-  .signin-btn { display: none; }
+
+  /* ✅ FIX: signin button mobile par bhi dikhega */
+  .signin-btn {
+    display: block;
+    padding: 6px 14px;
+    font-size: 13px;
+  }
 
   .user-btn { padding: 4px; }
-
   .user-dropdown { right: -10px; min-width: 190px; }
   .hamburger { display: flex; }
 
