@@ -4,7 +4,8 @@ import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
-const API = "http://localhost:5000";
+// ✅ FIX: localhost hardcode hataya
+const API = import.meta.env.VITE_API_BASE || "http://localhost:5000";
 const SESSION_DURATION = 30 * 60 * 1000; // 30 minutes
 
 export const AuthProvider = ({ children }) => {
@@ -18,7 +19,6 @@ export const AuthProvider = ({ children }) => {
   );
   const [loading, setLoading] = useState(false);
 
-  // ✅ Ref use karo — stale closure se bachne ke liye
   const sessionTimerRef = useRef(null);
 
   const clearAuth = () => {
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = async (showMessage = true) => {
-    // Timer clear karo
     if (sessionTimerRef.current) {
       clearTimeout(sessionTimerRef.current);
       sessionTimerRef.current = null;
@@ -46,14 +45,12 @@ export const AuthProvider = ({ children }) => {
     if (showMessage) toast.success("Logout! 👋");
   };
 
-  // ✅ 30 min ka exact timer set karo
   const startSessionTimer = (loginTime) => {
     if (sessionTimerRef.current) clearTimeout(sessionTimerRef.current);
 
     const remaining = SESSION_DURATION - (Date.now() - loginTime);
 
     if (remaining <= 0) {
-      // Pehle se expire ho chuka
       logout(false);
       toast.error("Session expire ho gaya, dobara login karein");
       return;
@@ -65,14 +62,12 @@ export const AuthProvider = ({ children }) => {
     }, remaining);
   };
 
-  // ✅ Activity reset — user active ho to timer restart karo
   const resetSessionTimer = () => {
     const loginTime = Date.now();
     localStorage.setItem("loginTime", String(loginTime));
     startSessionTimer(loginTime);
   };
 
-  // ✅ App open ho to existing session check karo
   useEffect(() => {
     const savedLoginTime = localStorage.getItem("loginTime");
     const savedUser = localStorage.getItem("shaheenUser");
@@ -81,7 +76,6 @@ export const AuthProvider = ({ children }) => {
       startSessionTimer(Number(savedLoginTime));
     }
 
-    // Activity listeners — in events pe timer reset hoga
     const events = ["click", "keypress", "mousemove", "touchstart", "scroll"];
     const handleActivity = () => {
       if (localStorage.getItem("shaheenToken")) {
@@ -95,7 +89,7 @@ export const AuthProvider = ({ children }) => {
       events.forEach((e) => window.removeEventListener(e, handleActivity));
       if (sessionTimerRef.current) clearTimeout(sessionTimerRef.current);
     };
-  }, []); // ✅ Sirf mount pe — no stale closure issue
+  }, []);
 
   const login = async (email, password) => {
     setLoading(true);
@@ -108,16 +102,12 @@ export const AuthProvider = ({ children }) => {
 
       if (res.data.success) {
         const loginTime = Date.now();
-
         setUser(res.data.user);
         setToken(res.data.token);
         localStorage.setItem("shaheenUser", JSON.stringify(res.data.user));
         localStorage.setItem("shaheenToken", res.data.token);
         localStorage.setItem("loginTime", String(loginTime));
-
-        // ✅ Timer start karo
         startSessionTimer(loginTime);
-
         toast.success(`Welcome back, ${res.data.user.name}!`);
         setLoading(false);
         return true;
@@ -143,15 +133,12 @@ export const AuthProvider = ({ children }) => {
 
       if (res.data.success) {
         const loginTime = Date.now();
-
         setUser(res.data.user);
         setToken(res.data.token);
         localStorage.setItem("shaheenUser", JSON.stringify(res.data.user));
         localStorage.setItem("shaheenToken", res.data.token);
         localStorage.setItem("loginTime", String(loginTime));
-
         startSessionTimer(loginTime);
-
         toast.success(`Account created! Welcome ${res.data.user.name}! 🎉`);
         setLoading(false);
         return true;
