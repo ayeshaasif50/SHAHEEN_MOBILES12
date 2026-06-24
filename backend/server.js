@@ -22,16 +22,19 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// CORS Configuration
+// ✅ CORS - Frontend + Admin dono allowed
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "http://localhost:5175",
+  "http://localhost:5176",
+  "https://shaheen-mobiles-12.vercel.app",      // ✅ Frontend
+  "https://shaheen-mobiles-12-6g3c.vercel.app", // ✅ Admin Panel
+];
+
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "http://localhost:5175",
-      "http://localhost:5176",
-      "https://shaheen-mobiles-12.vercel.app",
-    ],
+    origin: allowedOrigins,
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -42,29 +45,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Serve uploaded files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(
-  "/uploads",
-  express.static(path.join(__dirname, "public", "uploads"))
-);
+app.use("/uploads", express.static(path.join(__dirname, "public", "uploads")));
 
-// API Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
 app.use("/api/upload", uploadRoutes);
 app.use("/api/reviews", reviewRoutes);
 
-// Health Check
 app.get("/", (req, res) => {
-  res.json({
-    message: "✅ Shaheen Mobiles API Running!",
-    status: "OK",
-  });
+  res.json({ message: "✅ Shaheen Mobiles API Running!", status: "OK" });
 });
 
-// Error Handlers
 app.use(notFound);
 app.use(errorHandler);
 
@@ -72,13 +65,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
-  console.log("🌐 Allowed Origins:", [
-    "http://localhost:5173",
-    "http://localhost:5174",
-    "http://localhost:5175",
-    "http://localhost:5176",
-    "https://shaheen-mobiles-12.vercel.app",
-  ]);
+  console.log("🌐 Allowed Origins:", allowedOrigins);
 });
 
-console.log("✅ MongoDB URI Loaded:", !!process.env.MONGO_URI);
+console.log("MongoDB URI Loaded:", !!process.env.MONGO_URI);
