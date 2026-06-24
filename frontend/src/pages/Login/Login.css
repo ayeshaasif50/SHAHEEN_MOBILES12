@@ -140,7 +140,8 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  font-size: 15px;
+  display: flex;
+  align-items: center;
   user-select: none;
 }
 
@@ -160,6 +161,10 @@
   transition: all 0.25s ease;
   margin-top: 2px;
   letter-spacing: 0.3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
 }
 
 .auth-btn:hover {
@@ -216,6 +221,14 @@
 }
 
 .auth-switch span:hover { text-decoration: underline; }
+
+/* ========================
+   SPINNER
+   ======================== */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
 
 /* ========================
    MOBILE 480px
